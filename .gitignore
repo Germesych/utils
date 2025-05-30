@@ -1,0 +1,15 @@
+test_file
+.idea
+.vscode
+.DS_Store
+.git
+.venv
+.env
+venv
+env
+node_modules
+package-lock.json
+debug.log
+Thumbs.db
+__pycache__
+SRC_Lessons

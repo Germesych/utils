@@ -1,0 +1,23 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    network_mode: host
+    environment:
+      - OLLAMA_BASE_URL=http://127.0.0.1:11434
+      - CORS_ALLOW_ORIGIN=http://localhost:8080,http://127.0.0.1:8080
+    volumes:
+      - open-webui:/app/backend/data
+    restart: always
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup --interval 86400 open-webui
+    restart: unless-stopped
+
+volumes:
+  open-webui:
+    external: false
